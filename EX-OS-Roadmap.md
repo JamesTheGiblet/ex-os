@@ -1,25 +1,4 @@
-You're absolutely right.
-
-**We're not updating an existing roadmap. We're building from scratch.**
-
-Everything I just wrote was a correction of old assumptions. But you're starting fresh. From zero. With everything you've learned.
-
----
-
-## Building from Scratch
-
-That means:
-
-| Old Approach | New Approach |
-|--------------|--------------|
-| Retrospective fixes | Forward design |
-| Correcting old docs | Writing new ones |
-| Patching assumptions | Building with clarity |
-| Adding to what exists | Building what should exist |
-
----
-
-## The Starting Point
+# The Starting Point
 
 **What we know:**
 
@@ -43,7 +22,6 @@ A complete, sovereign, self-learning, self-healing semantic operating system.
 ### Phase 0: Foundation — The Core (📅 BUILDING)
 
 | Task | Status | Validation |
-|------|--------|------------|
 | SCP v1.2 schema | 📅 | `scp.json` validator works |
 | Ed25519 signing pipeline | 📅 | `sign.py` produces deterministic sigs |
 | ChronoSCRIBE root ledger | 📅 | `ledger.py anchor-root` passes |
@@ -60,7 +38,6 @@ A complete, sovereign, self-learning, self-healing semantic operating system.
 ### Phase 1: Intelligence — The Mind (📅 BUILDING)
 
 | Task | Status | Validation |
-|------|--------|------------|
 | Mimir binding capsule | 📅 | Binds to Phi-3-mini |
 | Mimir persona defined | 📅 | Terse, direct, Forge-style |
 | Mimir trust threshold | 📅 | λ < 0.6 not cited |
@@ -77,7 +54,6 @@ A complete, sovereign, self-learning, self-healing semantic operating system.
 ### Phase 2: Enforcement — The Immune System (📅 BUILDING)
 
 | Task | Status | Validation |
-|------|--------|------------|
 | Keystone Gate | 📅 | Binds LLM to SCP, enforces compliance |
 | Keystone Gate threshold | 📅 | λ > 0.85 confidence |
 | HAL tiers 1–5 | 📅 | λ thresholds mapped |
@@ -93,7 +69,6 @@ A complete, sovereign, self-learning, self-healing semantic operating system.
 ### Phase 3: Knowledge — The Memory (📅 BUILDING)
 
 | Task | Status | Validation |
-|------|--------|------------|
 | Anchor expert system | 📅 | Rule-based, deterministic |
 | Anchor genesis | 📅 | Constitution sealed |
 | Anchor source registry | 📅 | Every claim traced to source |
@@ -109,7 +84,6 @@ A complete, sovereign, self-learning, self-healing semantic operating system.
 ### Phase 4: Hardware — The Body (📅 BUILDING)
 
 | Task | Status | Validation |
-|------|--------|------------|
 | UEFI USB bootloader | 📅 | `BOOTX64.EFI` boots bare metal |
 | UBVM-OS core interpreter | 📅 | C interpreter, containment classes |
 | UBVM-OS shell | 📅 | REPL commands become capsules |
@@ -125,7 +99,6 @@ A complete, sovereign, self-learning, self-healing semantic operating system.
 ### Phase 5: Integration — The Nervous System (📅 BUILDING)
 
 | Task | Status | Validation |
-|------|--------|------------|
 | Network daemon | 📅 | Port 8080, unified API |
 | Unified dashboard | 📅 | Single UI for all components |
 | One-command install | 📅 | `curl | bash` deployment |
@@ -140,7 +113,6 @@ A complete, sovereign, self-learning, self-healing semantic operating system.
 ### Phase 6: Distribution — The Reach (📅 BUILDING)
 
 | Task | Status | Validation |
-|------|--------|------------|
 | VPS production | 📅 | Hetzner CX22 operational |
 | USB boot image | 📅 | On any x86_64 PC |
 | ESP32 mesh | 📅 | 10+ nodes |
@@ -156,7 +128,6 @@ A complete, sovereign, self-learning, self-healing semantic operating system.
 **Every phase must pass:**
 
 | Gate | Criteria |
-|------|----------|
 | **Code Complete** | All tasks implemented |
 | **Tests Passing** | All unit/integration tests pass |
 | **Fresh Clone Verified** | `git clone` → install → tests pass |
@@ -188,7 +159,6 @@ We are building:
 ## Next Steps
 
 | Priority | Task |
-|----------|------|
 | **P0** | Write `interpreter.py` (UBVM core) |
 | **P0** | Write `sign.py` (Ed25519 signing) |
 | **P0** | Write `ledger.py` (ChronoSCRIBE) |

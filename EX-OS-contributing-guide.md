@@ -16,8 +16,6 @@ This is not a typical open-source project. It is a **living system** that emerge
 
 ### 2.1 The Builder
 
-**JamesTheGiblet**
-
 - Self-taught developer
 - Built Ex-OS on a phone, in Termux, around a full-time job
 - Follows the ideas, trusts the flow
@@ -372,7 +370,6 @@ Ex-OS is governed by the **Meaning Sovereignty Licence (MSL-1.0)** .
 ### 11.1 How to Connect
 
 - **GitHub:** [JamesTheGiblet](https://github.com/JamesTheGiblet)
-- **Email:** gibletscreations@gmail.com
 - **Issues:** Open an issue in the relevant repository
 
 ### 11.2 How to Share

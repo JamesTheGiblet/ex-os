@@ -63,7 +63,7 @@
 
 **VISUAL:** Animated diagram of the Five-Stage Spine.
 
-```
+```txt
 DECLARE → CLASSIFY → TRUST-SCORE → AUDIT → ACT
 ```
 
@@ -91,7 +91,6 @@ DECLARE → CLASSIFY → TRUST-SCORE → AUDIT → ACT
 **VISUAL:** Each component appears with its biological analogy.
 
 | Component | Analogy |
-|-----------|---------|
 | **SCP** | Genetic code |
 | **UBVM** | Circulatory system |
 | **BuddAI** | Prefrontal cortex |
@@ -118,7 +117,7 @@ DECLARE → CLASSIFY → TRUST-SCORE → AUDIT → ACT
 
 **VISUAL:** Formula appearing.
 
-```
+```txt
 λ(t) = 1.00 + (λ₀ − 1.00) × e^(-kt)
 ```
 
@@ -135,7 +134,8 @@ DECLARE → CLASSIFY → TRUST-SCORE → AUDIT → ACT
 
 **TEXT:** "The Hardware Map"
 
-**VISUAL:** 
+**VISUAL:**
+
 - UEFI USB (boots before OS)
 - ESP32-C3 (edge sensors)
 - Ryzen 3300U (master node)
@@ -155,7 +155,7 @@ DECLARE → CLASSIFY → TRUST-SCORE → AUDIT → ACT
 
 **VISUAL:** Animated Forge Cycle.
 
-```
+```txt
 RECEIVE → DOCUMENT → BUILD → BREAK → LEARN → REBUILD → DISCOVER
 ```
 
@@ -220,7 +220,6 @@ RECEIVE → DOCUMENT → BUILD → BREAK → LEARN → REBUILD → DISCOVER
 ## Audio Notes
 
 | Element | Description |
-|---------|-------------|
 | **Music** | Ambient, building, slightly industrial. Calm but purposeful. |
 | **VO Tone** | Honest, passionate, slightly tired but determined. |
 | **Pacing** | Steady. Pauses between sentences. Natural, not rushed. |
@@ -231,7 +230,6 @@ RECEIVE → DOCUMENT → BUILD → BREAK → LEARN → REBUILD → DISCOVER
 ## Visual Notes
 
 | Element | Description |
-|---------|-------------|
 | **Colour Palette** | Dark blue/black background. Orange/amber highlights. Green text. |
 | **Typography** | Monospace for code. Sans-serif for titles. |
 | **Animation Style** | Clean, minimal, code-like. Lines drawing themselves. |
@@ -243,6 +241,7 @@ RECEIVE → DOCUMENT → BUILD → BREAK → LEARN → REBUILD → DISCOVER
 ## Social Media Versions
 
 ### 60-Second Version
+
 - 0:00-0:10: The Problem
 - 0:10-0:25: The Discovery
 - 0:25-0:40: The Solution
@@ -250,12 +249,14 @@ RECEIVE → DOCUMENT → BUILD → BREAK → LEARN → REBUILD → DISCOVER
 - 0:55-1:00: The Call to Action
 
 ### 30-Second Version
+
 - 0:00-0:05: The Problem
 - 0:05-0:15: The Discovery
 - 0:15-0:25: The Solution
 - 0:25-0:30: The Call to Action
 
 ### 15-Second Version
+
 - 0:00-0:05: "What if your thoughts could stay yours?"
 - 0:05-0:10: "Ex-OS: The system that was discovered, not designed."
 - 0:10-0:15: "github.com/JamesTheGiblet/Ex-OS"

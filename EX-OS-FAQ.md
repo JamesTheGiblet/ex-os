@@ -31,8 +31,6 @@ Ex-OS is not a company, a product, a platform, a framework, or a brand.
 
 ### 1.5 Who built it?
 
-**JamesTheGiblet**
-
 Self-taught developer. Built on a phone, in Termux, around a full-time job. Follows the ideas. Trusts the flow. Builds what feels right.
 
 ### 1.6 Is Ex-OS open source?
@@ -58,7 +56,6 @@ SCP delivers structured, trust-scored, auditable context to any LLM at runtime.
 ### 2.2 What are the five stages of the Forge Stack?
 
 | Stage | Component | What It Does |
-|-------|-----------|--------------|
 | **Declare** | SCP | Defines meaning |
 | **Classify** | DataCube | Assigns lenses (FACT/OPINION/FICTION/CONTEXT/UNKNOWN) |
 | **Trust-score** | Leighton Weight | Scores trust (λ) |
@@ -134,7 +131,6 @@ Written in C. No Linux. No Windows. No POSIX layer. UEFI bootloader. ESP32 edge 
 ### 3.1 Where can Ex-OS run?
 
 | Target | Purpose |
-|--------|---------|
 | **VPS (Hetzner CX22)** | Always-on cloud brain |
 | **Local PC** | Development environment |
 | **UEFI USB** | Bare-metal boot |
@@ -144,6 +140,7 @@ Written in C. No Linux. No Windows. No POSIX layer. UEFI bootloader. ESP32 edge 
 ### 3.2 How do I install Ex-OS?
 
 **VPS One-Command:**
+
 ```bash
 curl -sSL https://raw.githubusercontent.com/JamesTheGiblet/Ex-OS/main/install.sh | bash
 ```
@@ -154,8 +151,7 @@ See the [Deployment Guide](DEPLOYMENT.md).
 ### 3.3 What are the hardware requirements?
 
 | Requirement | Minimum |
-|-------------|---------|
-| **CPU** | 2 cores |
+=| **CPU** | 2 cores |
 | **RAM** | 2GB (4GB recommended) |
 | **Storage** | 20GB (35GB recommended) |
 | **Network** | Public IP, port 8080 open |
@@ -196,6 +192,7 @@ Right now, one `did:key` signs everything in the stack. That means HAL's tier ch
 MSL-1.0 is the licence for Ex-OS.
 
 **Core principles:**
+
 - You own your meaning
 - You control your interpretation
 - Your data stays yours
@@ -310,7 +307,8 @@ python cli.py qa
 The Forge is the process that created Ex-OS.
 
 It is the cycle of:
-```
+
+```txt
 RECEIVE → DOCUMENT → BUILD → BREAK → LEARN → REBUILD → DISCOVER
 ```
 

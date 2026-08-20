@@ -573,8 +573,6 @@ Generate code with context.
 
 ### 3.2 BuddAI API (Port 8080 /api/chat)
 
-*See Section 2.2*
-
 ---
 
 ### 3.3 Ollama API (Port 11434)
@@ -598,8 +596,6 @@ Generate text.
     "stream": false
 }
 ```
-
-## POST /api/chat
 
 Chat with model.
 
@@ -707,7 +703,7 @@ ws://<exos-host>:8080/ws/ledger
 ## 7. Rate Limiting
 
 | Endpoint | Limit | Window |
-#| `/api/chat` | 60/min | 1 minute |
+| `/api/chat` | 60/min | 1 minute |
 | `/api/query` | 30/min | 1 minute |
 | `/api/validate` | 100/min | 1 minute |
 | `/api/hal/seal` | 10/min | 1 minute |
@@ -767,7 +763,6 @@ curl -X POST http://localhost:8080/api/hal/seal \
 ## 10. Complete API Reference
 
 | Endpoint | Method | Description |
-|----------|--------|-------------|
 | `/api/status` | GET | System status |
 | `/api/health` | GET | Health check |
 | `/api/chat` | POST | BuddAI chat |
