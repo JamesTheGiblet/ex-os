@@ -13,6 +13,29 @@ Each entry follows the **Good / Bad / Ugly** pattern:
 
 ---
 
+## [Unreleased]
+
+### Install & CLI Hardening
+
+**Good:**
+
+- Fixed a fatal bug in `install.sh`: `mkdir -p buddai_memory.db` collided with the real SQLite file of the same name and aborted every install under `set -e`
+- Added the missing `requirements.txt` (`requests`, `cryptography`) — previously every `pip install -r requirements.txt` in `install.sh` silently no-op'd
+- Corrected the four "initialise" steps in `install.sh` (signing key, Leighton engine, ChronoSCRIBE, BuddAI memory) to match the real `sign.py` / `engine.py` / `ledger.py` / `memory.py` interfaces instead of calling subcommands that never existed
+- Removed `install.sh` references to `scheduler_daemon.py` and an `exos-scheduler` systemd service — neither exists anywhere in the repo
+- Fixed `core/scp/cli.py` to run as a plain script (`python core/scp/cli.py ...`) as well as via `-m core.scp.cli` — it previously only worked in module form
+- Fixed a Windows-only crash where the ✅/❌ status emoji broke on `cp1252`-encoded consoles immediately after a successful operation (e.g. `generate-key` would create the key, then crash on its own confirmation message)
+
+**Bad:**
+
+- `docs/EX-OS-deployment-guide.md` still describes the old `UBVM-os` layout (root-level `network_daemon.py`/`scheduler_daemon.py`) rather than the current `integration/` layout — not yet reconciled
+
+**Ugly:**
+
+- The same relative-import fragility that broke `core/scp/cli.py` exists across most `core/*/cli.py` entry points (`chronoscribe`, `datacube`, `hal`, `keystone`, `leighton`, `watermark`, `mimir`) — `scripts/sign-everything.py` shells out to several of these directly (`python core/chronoscribe/cli.py anchor ...`) and hits the identical `ImportError` / `UnicodeEncodeError` pair. Only `core/scp/cli.py` has been fixed so far; the rest is outstanding.
+
+---
+
 ## [0.1.0] — 2026-08-20
 
 ### The Build — Ex-OS Complete

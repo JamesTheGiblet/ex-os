@@ -18,11 +18,21 @@ import argparse
 from pathlib import Path
 from typing import Optional
 
+# Allow `python core/scp/cli.py ...` as well as `python -m core.scp.cli ...`.
+# Direct script execution has no parent package, so the relative imports
+# below (`from .sign import ...`) fail with ImportError; fall back to the
+# absolute package path once the repo root is on sys.path.
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 def validate_command(file_path: str):
     """Validate a capsule."""
     try:
-        from .schema import validate_schema
+        try:
+            from .schema import validate_schema
+        except ImportError:
+            from core.scp.schema import validate_schema
         with open(file_path, "r") as f:
             capsule = json.load(f)
 
@@ -37,7 +47,10 @@ def validate_command(file_path: str):
 def sign_command(file_path: str, key_path: str, output: Optional[str] = None) -> None:
     """Sign a capsule."""
     try:
-        from .sign import sign_capsule_file
+        try:
+            from .sign import sign_capsule_file
+        except ImportError:
+            from core.scp.sign import sign_capsule_file
         output = sign_capsule_file(file_path, key_path, output)
         print(f"✅ Signed: {output}")
     except Exception as e:
@@ -48,7 +61,10 @@ def sign_command(file_path: str, key_path: str, output: Optional[str] = None) ->
 def verify_command(file_path: str, key_path: Optional[str] = None) -> None:
     """Verify a capsule."""
     try:
-        from .verify import verify_capsule
+        try:
+            from .verify import verify_capsule
+        except ImportError:
+            from core.scp.verify import verify_capsule
         valid, message, capsule = verify_capsule(file_path, key_path)
 
         if valid and capsule is not None:
@@ -65,7 +81,10 @@ def verify_command(file_path: str, key_path: Optional[str] = None) -> None:
 def generate_key_command(output: str = "forge-signing.pem"):
     """Generate a key pair."""
     try:
-        from .sign import generate_key_pair
+        try:
+            from .sign import generate_key_pair
+        except ImportError:
+            from core.scp.sign import generate_key_pair
         generate_key_pair(output)
         print(f"✅ Key pair generated: {output}")
     except Exception as e:
@@ -76,7 +95,10 @@ def generate_key_command(output: str = "forge-signing.pem"):
 def canonicalise_command(file_path: str):
     """Canonicalise a capsule."""
     try:
-        from .canonicalise import canonicalise_json
+        try:
+            from .canonicalise import canonicalise_json
+        except ImportError:
+            from core.scp.canonicalise import canonicalise_json
         with open(file_path, "r") as f:
             capsule = json.load(f)
 
@@ -135,4 +157,10 @@ def main():
 
 
 if __name__ == "__main__":
+    # Windows consoles default to a legacy codepage (e.g. cp1252) that can't
+    # encode the emoji used in status messages above; force UTF-8 so a
+    # successful operation doesn't crash on the confirmation print.
+    for _stream in (sys.stdout, sys.stderr):
+        if hasattr(_stream, "reconfigure"):
+            _stream.reconfigure(encoding="utf-8", errors="replace")
     main()

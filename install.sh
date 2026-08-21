@@ -140,23 +140,23 @@ mkdir -p cubes
 mkdir -p seals
 mkdir -p anchor_data
 mkdir -p axiom_data
-mkdir -p buddai_memory.db
+# buddai_memory.db is a SQLite file (created below), not a directory
 
 # Generate signing key
 echo -e "${BLUE}[INFO]${NC} Generating signing key..."
-python core/scp/sign.py genkey 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} Key generation skipped (will run on first use)"
+python -m core.scp.sign --generate 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} Key generation skipped (will run on first use)"
 
 # Initialise Leighton Weight Engine
 echo -e "${BLUE}[INFO]${NC} Initialising Leighton Weight Engine..."
-python core/leighton/engine.py init 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} Leighton init skipped (may not exist)"
+python -c "from core.leighton.engine import LeightonEngine; LeightonEngine()" 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} Leighton init skipped (may not exist)"
 
 # Anchor ChronoSCRIBE
 echo -e "${BLUE}[INFO]${NC} Anchoring ChronoSCRIBE..."
-python core/chronoscribe/ledger.py anchor-root 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} ChronoSCRIBE anchor skipped (may not exist)"
+python -c "from core.chronoscribe.ledger import Ledger; Ledger('exos')" 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} ChronoSCRIBE anchor skipped (may not exist)"
 
 # Initialise BuddAI memory
 echo -e "${BLUE}[INFO]${NC} Initialising BuddAI memory..."
-python intelligence/buddai/memory.py status 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} BuddAI init skipped"
+python -c "from intelligence.buddai.memory import MemorySystem; MemorySystem()" 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} BuddAI init skipped"
 
 # ============================================================
 # SETUP SYSTEMD (VPS/Linux)
@@ -166,8 +166,8 @@ if [ "$ENV" = "debian" ] || [ "$ENV" = "redhat" ]; then
     echo ""
     echo -e "${BLUE}[INFO]${NC} Setting up systemd services..."
 
-    # Create service files
-    cat > /etc/systemd/system/exos-network.service << 'EOF'
+    # Create service file
+    cat > /etc/systemd/system/exos-network.service << EOF
 [Unit]
 Description=Ex-OS Network Daemon
 After=network.target ollama.service
@@ -175,27 +175,9 @@ After=network.target ollama.service
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/root/ex-os
-Environment="EXOS_HOME=/root/ex-os"
-ExecStart=/root/ex-os/venv/bin/python /root/ex-os/integration/network_daemon.py --port 8080
-Restart=always
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-    cat > /etc/systemd/system/exos-scheduler.service << 'EOF'
-[Unit]
-Description=Ex-OS Scheduler Daemon
-After=network.target
-
-[Service]
-Type=simple
-User=root
-WorkingDirectory=/root/ex-os
-Environment="EXOS_HOME=/root/ex-os"
-ExecStart=/root/ex-os/venv/bin/python /root/ex-os/scheduler_daemon.py
+WorkingDirectory=$EXOS_DIR
+Environment="EXOS_HOME=$EXOS_DIR"
+ExecStart=$EXOS_DIR/venv/bin/python $EXOS_DIR/integration/network_daemon.py --port 8080
 Restart=always
 RestartSec=10
 
@@ -206,11 +188,10 @@ EOF
     # Reload systemd
     systemctl daemon-reload
 
-    # Enable services
+    # Enable service
     systemctl enable exos-network 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} Could not enable exos-network"
-    systemctl enable exos-scheduler 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} Could not enable exos-scheduler"
 
-    echo -e "${GREEN}[OK]${NC} Systemd services configured"
+    echo -e "${GREEN}[OK]${NC} Systemd service configured"
 fi
 
 # ============================================================
@@ -279,7 +260,6 @@ if [ "$ENV" = "termux" ]; then
     ./termux-start.sh &
 elif [ "$ENV" = "debian" ] || [ "$ENV" = "redhat" ]; then
     systemctl start exos-network 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} Could not start exos-network"
-    systemctl start exos-scheduler 2>/dev/null || echo -e "${YELLOW}[WARN]${NC} Could not start exos-scheduler"
 else
     echo -e "${YELLOW}[WARN]${NC} No service manager found. Start manually:"
     echo "  python integration/network_daemon.py --port 8080"

@@ -15,11 +15,34 @@ A complete, sovereign, self-learning, self-healing semantic operating system.
 
 ---
 
+## Status Update — 2026-08-21
+
+The phase plan below was written before the build started and still reads
+"BUILDING" throughout. Per [`CHANGELOG.md`](../CHANGELOG.md), v0.1.0
+(2026-08-20) shipped with all 13 core components built and 14/14 fresh-clone
+tests passing. Actual phase status, cross-referenced against the changelog's
+Good/Bad/Ugly lists:
+
+| Phase | Status | Notes |
+|-------|--------|-------|
+| 0 — Foundation | ✅ Done | SCP, signing, ChronoSCRIBE, Leighton, DataCube lenses, HAL, UBVM interpreter all built and operational |
+| 1 — Intelligence | 🔄 Partial | BuddAI memory/personality working; Mimir built but **not yet LLM-bound** (Ollama integration still missing); LEGION trading primitives not evidenced as built |
+| 2 — Enforcement | 🔄 Partial | Leighton trust scoring and HAL seal operational; Replicant swarm runs but population dies out without manual food; Keystone Gate status unconfirmed |
+| 3 — Knowledge | 🔄 Partial | Anchor and DataCube lenses working; DataCube bulk ingestion and Justitia not confirmed |
+| 4 — Hardware | ❌ Stubbed | Bare-metal networking (UBVM-OS `net.c`) remains unfinished — this is the reason UBVM-OS was split off as its own effort |
+| 5 — Integration | 🔄 Partial | Network daemon and dashboard built (dashboard shows OFFLINE until the daemon runs); one-command install existed but was broken in several places — repaired 2026-08-21, see Changelog |
+| 6 — Distribution | ❌ Not started | No enterprise pilots yet; Ex-OS only validated on the phone/Termux it was built on |
+
+The per-task tables below are the original pre-build plan and are kept for
+history; treat the table above as the authoritative current status.
+
+---
+
 ## The New Roadmap (From Scratch)
 
 ---
 
-### Phase 0: Foundation — The Core (📅 BUILDING)
+### Phase 0: Foundation — The Core (✅ DONE per v0.1.0 — see Status Update above)
 
 | Task | Status | Validation |
 | SCP v1.2 schema | 📅 | `scp.json` validator works |
@@ -158,16 +181,22 @@ We are building:
 
 ## Next Steps
 
+Superseded by the v0.1.0 build (see [Status Update](#status-update--2026-08-21)
+above) — the P0/P1/P2 items below were all written before the phase 0 build.
+Current real priorities, drawn from `CHANGELOG.md`'s Bad/Ugly lists:
+
 | Priority | Task |
-| **P0** | Write `interpreter.py` (UBVM core) |
-| **P0** | Write `sign.py` (Ed25519 signing) |
-| **P0** | Write `ledger.py` (ChronoSCRIBE) |
-| **P0** | Write `leighton_weight.py` (λ engine) |
-| **P1** | Write `datacube.py` (five lenses) |
-| **P1** | Write `hal.py` (seal command) |
-| **P1** | Write `keystone_gate.py` (enforcement) |
-| **P2** | Write `network_daemon.py` (API) |
-| **P2** | Write `dashboard.html` (UI) |
+|----------|------|
+| **P0** | Fix relative-import fragility across `core/*/cli.py` (chronoscribe, datacube, hal, keystone, leighton, watermark, mimir) — same class of bug already fixed in `core/scp/cli.py`, still breaks `scripts/sign-everything.py` |
+| **P0** | Reconcile `docs/EX-OS-deployment-guide.md` with the current `integration/` layout (it still describes the old root-level `UBVM-os` daemons) |
+| **P1** | Integrate Ollama so Mimir and BuddAI have LLM support |
+| **P1** | Give Leighton Weight Engine an automatic feedback loop (currently manual attestation only) |
+| **P1** | Fix Replicant swarm energy economics so population doesn't die out without manual food |
+| **P2** | Resolve the single-operator honesty problem (one `did:key` signs everything) |
+| **P2** | Bare-metal networking for UBVM-OS (`net.c` still stubs) |
+| **P3** | PostgreSQL backend for DataCube scaling beyond ~500 nodes |
+| **P3** | Cross-VPS ChronoSCRIBE synchronisation |
+| **P3** | First enterprise pilot (Axiom is packaged but unproven at scale) |
 
 ---
 
